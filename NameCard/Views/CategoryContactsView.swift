@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Charts
 
 struct CategoryContactsView: View {
     let category: ContactCategory
@@ -15,19 +16,31 @@ struct CategoryContactsView: View {
 
     var body: some View {
         List {
-            if categoryContacts.isEmpty {
-                ContentUnavailableView(
-                    "No Contacts",
-                    systemImage: "person.slash",
-                    description: Text("Add contacts to \(category.name) category")
-                )
-            } else {
-                ForEach(categoryContacts) { contact in
-                    NavigationLink(destination: StoredContactDetailView(contact: contact)) {
-                        StoredContactRowView(contact: contact)
-                    }
+            if !categoryContacts.isEmpty {
+                Section {
+                    CategoryStatsSection(contacts: categoryContacts, category: category)
+                } header: {
+                    Text("Analytics")
                 }
-                .onDelete(perform: deleteContacts)
+            }
+
+            Section {
+                if categoryContacts.isEmpty {
+                    ContentUnavailableView(
+                        "No Contacts",
+                        systemImage: "person.slash",
+                        description: Text("Add contacts to \(category.name) category")
+                    )
+                } else {
+                    ForEach(categoryContacts) { contact in
+                        NavigationLink(destination: StoredContactDetailView(contact: contact)) {
+                            StoredContactRowView(contact: contact)
+                        }
+                    }
+                    .onDelete(perform: deleteContacts)
+                }
+            } header: {
+                Text("Contacts (\(categoryContacts.count))")
             }
         }
         .navigationTitle(category.name)
@@ -50,6 +63,7 @@ struct CategoryContactsView: View {
         for index in offsets {
             modelContext.delete(categoryContacts[index])
         }
+        try? modelContext.save()
     }
 }
 
@@ -95,5 +109,127 @@ struct StoredContactRowView: View {
             }
         }
         .padding(.vertical, 2)
+    }
+}
+
+struct CategoryStatsSection: View {
+    let contacts: [StoredContact]
+    let category: ContactCategory
+
+    var body: some View {
+        VStack(spacing: 16) {
+            // Contacts added over time for this category
+            ContactsTimelineChart(contacts: contacts, category: category)
+
+            // Field completeness for this category
+            CategoryFieldCompletenessChart(contacts: contacts)
+        }
+        .padding(.vertical, 8)
+    }
+}
+
+struct ContactsTimelineChart: View {
+    let contacts: [StoredContact]
+    let category: ContactCategory
+
+    private var timelineData: [TimeSeriesData] {
+        contacts.contactsAddedOverTime()
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Contacts Added Over Time")
+                .font(.subheadline)
+                .fontWeight(.medium)
+
+            if timelineData.isEmpty {
+                Text("No timeline data available")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .frame(height: 100)
+            } else {
+                Chart(timelineData) { item in
+                    LineMark(
+                        x: .value("Period", item.period),
+                        y: .value("Count", item.count)
+                    )
+                    .foregroundStyle(Color(hex: category.colorHex))
+                    .lineStyle(StrokeStyle(lineWidth: 2))
+
+                    PointMark(
+                        x: .value("Period", item.period),
+                        y: .value("Count", item.count)
+                    )
+                    .foregroundStyle(Color(hex: category.colorHex))
+                }
+                .frame(height: 100)
+                .chartYAxis {
+                    AxisMarks(position: .leading) { _ in
+                        AxisValueLabel()
+                            .font(.caption2)
+                    }
+                }
+                .chartXAxis {
+                    AxisMarks { _ in
+                        AxisValueLabel()
+                            .font(.caption2)
+                    }
+                }
+            }
+        }
+        .padding()
+        .background(Color(.systemGray6))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+}
+
+struct CategoryFieldCompletenessChart: View {
+    let contacts: [StoredContact]
+
+    private var completenessData: [FieldCompletenessData] {
+        contacts.fieldCompleteness()
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Information Completeness")
+                .font(.subheadline)
+                .fontWeight(.medium)
+
+            if completenessData.isEmpty {
+                Text("No field data available")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .frame(height: 80)
+            } else {
+                Chart(completenessData) { item in
+                    BarMark(
+                        x: .value("Percentage", item.percentage),
+                        y: .value("Field", item.field)
+                    )
+                    .foregroundStyle(.cyan.opacity(0.7))
+                }
+                .frame(height: 120)
+                .chartXAxis {
+                    AxisMarks(position: .bottom) { value in
+                        AxisValueLabel {
+                            if let percentage = value.as(Double.self) {
+                                Text("\(Int(percentage))%")
+                                    .font(.caption2)
+                            }
+                        }
+                    }
+                }
+                .chartYAxis {
+                    AxisMarks(position: .leading) { _ in
+                        AxisValueLabel()
+                            .font(.caption2)
+                    }
+                }
+            }
+        }
+        .padding()
+        .background(Color(.systemGray6))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 }

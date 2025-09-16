@@ -97,6 +97,14 @@ struct PeopleListView: View {
                 }
             }
             .navigationTitle("Directory")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: StatisticsView()) {
+                        Image(systemName: "chart.bar")
+                            .foregroundStyle(.blue)
+                    }
+                }
+            }
             .sheet(isPresented: $showingAddContact) {
                 AddContactView()
             }
@@ -136,6 +144,7 @@ struct PeopleListView: View {
     private func deleteCategoryAndMoveContacts(_ category: ContactCategory) {
         // Delete the category
         modelContext.delete(category)
+        try? modelContext.save()
     }
 }
 
@@ -270,6 +279,7 @@ struct UncategorizedContactsView: View {
         for index in offsets {
             modelContext.delete(uncategorizedContacts[index])
         }
+        try? modelContext.save()
     }
 }
 
