@@ -6,19 +6,99 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		061A80732E8D111600063A2A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061A80722E8D111600063A2A /* WidgetKit.framework */; };
+		061A80752E8D111600063A2A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061A80742E8D111600063A2A /* SwiftUI.framework */; };
+		061A80862E8D111700063A2A /* NameCardWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 061A80702E8D111600063A2A /* NameCardWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		061A80842E8D111700063A2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06373BA42E6E24A600C2AFA4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 061A806F2E8D111600063A2A;
+			remoteInfo = NameCardWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		061A808B2E8D111700063A2A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				061A80862E8D111700063A2A /* NameCardWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		061A80702E8D111600063A2A /* NameCardWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NameCardWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		061A80722E8D111600063A2A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		061A80742E8D111600063A2A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		06373BAC2E6E24A600C2AFA4 /* NameCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NameCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		061A80872E8D111700063A2A /* Exceptions for "NameCardWidget" folder in "NameCardWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 061A806F2E8D111600063A2A /* NameCardWidgetExtension */;
+		};
+		061A80932E8D11B600063A2A /* Exceptions for "NameCard" folder in "NameCardWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/ContactCategory.swift,
+				Models/StoredContact.swift,
+				Shared/WidgetDataManager.swift,
+			);
+			target = 061A806F2E8D111600063A2A /* NameCardWidgetExtension */;
+		};
+		066A88A32E93B8840079D703 /* Exceptions for "NameCard" folder in "NameCard" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 06373BAB2E6E24A600C2AFA4 /* NameCard */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		061A80762E8D111600063A2A /* NameCardWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				061A80872E8D111700063A2A /* Exceptions for "NameCardWidget" folder in "NameCardWidgetExtension" target */,
+			);
+			path = NameCardWidget;
+			sourceTree = "<group>";
+		};
 		06373BAE2E6E24A600C2AFA4 /* NameCard */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				066A88A32E93B8840079D703 /* Exceptions for "NameCard" folder in "NameCard" target */,
+				061A80932E8D11B600063A2A /* Exceptions for "NameCard" folder in "NameCardWidgetExtension" target */,
+			);
 			path = NameCard;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		061A806D2E8D111600063A2A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				061A80752E8D111600063A2A /* SwiftUI.framework in Frameworks */,
+				061A80732E8D111600063A2A /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		06373BA92E6E24A600C2AFA4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -29,10 +109,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		061A80712E8D111600063A2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				061A80722E8D111600063A2A /* WidgetKit.framework */,
+				061A80742E8D111600063A2A /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		06373BA32E6E24A600C2AFA4 = {
 			isa = PBXGroup;
 			children = (
 				06373BAE2E6E24A600C2AFA4 /* NameCard */,
+				061A80762E8D111600063A2A /* NameCardWidget */,
+				061A80712E8D111600063A2A /* Frameworks */,
 				06373BAD2E6E24A600C2AFA4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				06373BAC2E6E24A600C2AFA4 /* NameCard.app */,
+				061A80702E8D111600063A2A /* NameCardWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +140,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		061A806F2E8D111600063A2A /* NameCardWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 061A80882E8D111700063A2A /* Build configuration list for PBXNativeTarget "NameCardWidgetExtension" */;
+			buildPhases = (
+				061A806C2E8D111600063A2A /* Sources */,
+				061A806D2E8D111600063A2A /* Frameworks */,
+				061A806E2E8D111600063A2A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				061A80762E8D111600063A2A /* NameCardWidget */,
+			);
+			name = NameCardWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = NameCardWidgetExtension;
+			productReference = 061A80702E8D111600063A2A /* NameCardWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		06373BAB2E6E24A600C2AFA4 /* NameCard */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 06373BB72E6E24A800C2AFA4 /* Build configuration list for PBXNativeTarget "NameCard" */;
@@ -55,10 +169,12 @@
 				06373BA82E6E24A600C2AFA4 /* Sources */,
 				06373BA92E6E24A600C2AFA4 /* Frameworks */,
 				06373BAA2E6E24A600C2AFA4 /* Resources */,
+				061A808B2E8D111700063A2A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				061A80852E8D111700063A2A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				06373BAE2E6E24A600C2AFA4 /* NameCard */,
@@ -77,9 +193,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2600;
+				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					061A806F2E8D111600063A2A = {
+						CreatedOnToolsVersion = 26.1;
+					};
 					06373BAB2E6E24A600C2AFA4 = {
 						CreatedOnToolsVersion = 26.0;
 					};
@@ -100,11 +219,19 @@
 			projectRoot = "";
 			targets = (
 				06373BAB2E6E24A600C2AFA4 /* NameCard */,
+				061A806F2E8D111600063A2A /* NameCardWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		061A806E2E8D111600063A2A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		06373BAA2E6E24A600C2AFA4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +242,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		061A806C2E8D111600063A2A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		06373BA82E6E24A600C2AFA4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +258,79 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		061A80852E8D111700063A2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 061A806F2E8D111600063A2A /* NameCardWidgetExtension */;
+			targetProxy = 061A80842E8D111700063A2A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		061A80892E8D111700063A2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = NameCardWidget/NameCardWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 77GUV2264S;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NameCardWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NameCardWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.buildwithharry.NameCard.NameCardWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		061A808A2E8D111700063A2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = NameCardWidget/NameCardWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 77GUV2264S;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NameCardWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NameCardWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.buildwithharry.NameCard.NameCardWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		06373BB52E6E24A800C2AFA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -251,11 +457,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NameCard/NameCard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 77GUV2264S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NameCard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -284,11 +492,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NameCard/NameCard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 77GUV2264S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NameCard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -315,6 +525,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		061A80882E8D111700063A2A /* Build configuration list for PBXNativeTarget "NameCardWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				061A80892E8D111700063A2A /* Debug */,
+				061A808A2E8D111700063A2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		06373BA72E6E24A600C2AFA4 /* Build configuration list for PBXProject "NameCard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -10,42 +10,40 @@ struct StatisticsView: View {
     let people = Person.sampleData
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                LazyVStack(spacing: 20) {
-                    // Contact Distribution by Category
-                    CategoryDistributionChart(
-                        data: allContacts.categoryDistribution(categories: categories)
-                    )
+        ScrollView {
+            LazyVStack(spacing: 20) {
+                // Contact Distribution by Category
+                CategoryDistributionChart(
+                    data: allContacts.categoryDistribution(categories: categories)
+                )
 
-                    // Contacts Added Over Time
-                    ContactsOverTimeChart(
-                        data: allContacts.contactsAddedOverTime()
-                    )
+                // Contacts Added Over Time
+                ContactsOverTimeChart(
+                    data: allContacts.contactsAddedOverTime()
+                )
 
-                    // Teachers vs Students
-                    PersonTypeDistributionChart(
-                        data: people.typeDistribution()
-                    )
+                // Teachers vs Students
+                PersonTypeDistributionChart(
+                    data: people.typeDistribution()
+                )
 
-                    // Field Completeness
-                    FieldCompletenessChart(
-                        data: allContacts.fieldCompleteness()
-                    )
+                // Field Completeness
+                FieldCompletenessChart(
+                    data: allContacts.fieldCompleteness()
+                )
 
-                    // Summary Stats
-                    SummaryStatsView(
-                        totalContacts: allContacts.count,
-                        totalCategories: categories.count,
-                        teachersCount: people.filter { $0.type == .teacher }.count,
-                        studentsCount: people.filter { $0.type == .student }.count
-                    )
-                }
-                .padding()
+                // Summary Stats
+                SummaryStatsView(
+                    totalContacts: allContacts.count,
+                    totalCategories: categories.count,
+                    teachersCount: people.filter { $0.type == .teacher }.count,
+                    studentsCount: people.filter { $0.type == .student }.count
+                )
             }
-            .navigationTitle("Statistics")
-            .navigationBarTitleDisplayMode(.large)
+            .padding()
         }
+        .navigationTitle("Statistics")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
@@ -67,9 +65,16 @@ struct CategoryDistributionChart: View {
                 .frame(height: 200)
             } else {
                 Chart(data) { item in
-                    // TODO: Swift Charts
+                    SectorMark(
+                        angle: .value("Count", item.count),
+                        innerRadius: .ratio(0.4),
+                        angularInset: 1.5
+                    )
+                    .foregroundStyle(Color(hex: item.color))
+                    .opacity(0.8)
                 }
                 .frame(height: 200)
+                .chartLegend(position: .bottom, alignment: .center)
             }
         }
         .padding()
@@ -96,9 +101,22 @@ struct ContactsOverTimeChart: View {
                 .frame(height: 200)
             } else {
                 Chart(data) { item in
-                    // TODO: Swift Charts
+                    BarMark(
+                        x: .value("Period", item.period),
+                        y: .value("Count", item.count)
+                    )
+                    .foregroundStyle(.blue.gradient)
                 }
                 .frame(height: 200)
+                .chartYAxis {
+                    AxisMarks(position: .leading)
+                }
+                .chartXAxis {
+                    AxisMarks { _ in
+                        AxisValueLabel()
+                            .font(.caption)
+                    }
+                }
             }
         }
         .padding()

@@ -7,6 +7,8 @@ struct PeopleListView: View {
     @Query private var categories: [ContactCategory]
     @Query private var allContacts: [StoredContact]
 
+    @Binding var navigationPath: NavigationPath
+
     @State private var showingAddContact = false
     @State private var showingAddCategory = false
     @State private var showingDeleteAlert = false
@@ -29,7 +31,7 @@ struct PeopleListView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             List {
                 Section("Teachers") {
                     ForEach(teachersSorted) { person in
@@ -99,7 +101,9 @@ struct PeopleListView: View {
             .navigationTitle("Directory")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: StatisticsView()) {
+                    Button {
+                        navigationPath.append("statistics")
+                    } label: {
                         Image(systemName: "chart.bar")
                             .foregroundStyle(.blue)
                     }
@@ -129,6 +133,17 @@ struct PeopleListView: View {
                     } else {
                         Text("Are you sure you want to delete the \"\(category.name)\" category? \(contactCount) contact\(contactCount == 1 ? "" : "s") will be moved to Uncategorized.")
                     }
+                }
+            }
+            .navigationDestination(for: ContactCategory.self) { category in
+                // TODO: CategoryContactsView(category: category)
+            }
+            .navigationDestination(for: StoredContact.self) { contact in
+                // TODO: StoredContactDetailView(contact: contact)
+            }
+            .navigationDestination(for: String.self) { destination in
+                if destination == "statistics" {
+                    // TODO: StatisticsView()
                 }
             }
         }
@@ -284,5 +299,5 @@ struct UncategorizedContactsView: View {
 }
 
 #Preview {
-    PeopleListView()
+    PeopleListView(navigationPath: .constant(NavigationPath()))
 }
